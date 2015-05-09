@@ -1,4 +1,6 @@
-# smokEE
+# SmokEE - Java EE 7 Smoke-Testing Framework
+
+## Master Thesis - Multimedia und Softwareentwicklung - Technikum Wien 2015
 
 Die Popularität von agilen Vorgehensmodellen in der Softwareentwicklung sowie die Verwendung von Continuous Integration und Continuous Delivery Systemen führt zwangsläufig zu einer erhöhten Anzahl an Lieferungen und Installationen von Softwarekomponenten. Ein gewisses Maß an Qualität kann dabei nur erreicht werden, wenn nach jeder erfolgten Installation das grundlegende Funktionieren des Systems verifiziert wird. Um die daraus resultierenden erhöhten Testaufwände zu reduzieren, ist es notwendig, die sogenannten Smoke-Tests, die der Überprüfung der Basisfunktionen dienen, möglichst effizient zu gestalten. Die Effizienz kann dadurch gesteigert werden, dass die Tests zum einen möglichst einfach definierbar sind und zum anderen automatisch ausgeführt werden.
 
