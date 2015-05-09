@@ -1,0 +1,33 @@
+div.messages-container {
+	position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 2px solid #000;
+}
+
+li.input-container {
+	list-style-type: none;
+}
+
+.messages-info {
+     color: blue;
+}
+
+.messages-warn {
+     color: yellow;
+}
+
+.messages-error {
+     color: red;
+}
+
+.messages-fatal {
+     color: red;
+     font-weight: bold;
+}
+
+.input-error {
+	border: 2px solid red;
+}

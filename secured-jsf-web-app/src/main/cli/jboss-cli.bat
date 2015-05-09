@@ -1,0 +1,1 @@
+/subsystem=naming/binding=java\:global\/at\/mse\/walchhofer\/smoking\/enabled:add(binding-type="simple", value="true")

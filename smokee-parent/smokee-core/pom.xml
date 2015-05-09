@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>at.mse.walchhofer.smokee</groupId>
+		<artifactId>smokee-parent</artifactId>
+		<version>0.2.1</version>
+	</parent>
+
+	<artifactId>smokee-core</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>javax.cache</groupId> -->
+		<!-- <artifactId>cache-api</artifactId> -->
+		<!-- <version>1.0.0</version> -->
+		<!-- <scope>compile</scope> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.3</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>at.mse.walchhofer.smokee</groupId>
+			<artifactId>smokee-api</artifactId>
+			<version>0.2.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>at.mse.walchhofer.smokee</groupId>
+			<artifactId>smokee-utilities</artifactId>
+			<version>0.2.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<finalName>${project.artifactId}-${project.version}-with-dependencies</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

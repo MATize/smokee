@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		<f:metadata>
+	    	<f:viewParam name="#{editAccountView.getUrlParamId()}" value="#{editAccountView.id}" />
+<!-- 	    	<f:event type="preRenderView" listener="#{editAccountView.edit}" /> -->
+	    	<f:event type="postInvokeAction" listener="#{editAccountView.edit}" />
+		</f:metadata>
+		 
+		<h3>
+			<h:outputText value="#{editAccountView.viewName()}"></h:outputText>
+		</h3>
+		<h:form id="#{editAccountView.formId()}">
+			<ul>
+				<li class="input-container">
+					<label>
+						<span>Vorname</span>
+						<h:inputText 
+							id="vorname" label="Vorname" value="#{editAccountView.vorname}" styleClass="#{editAccountView.vornameValid and component.valid? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Nachname</span>
+						<h:inputText
+							id="nachname" label="Nachname" value="#{editAccountView.nachname}"  styleClass="#{editAccountView.nachnameValid and component.valid ? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>E-Mail</span>
+						<h:inputText id="email" label="E-Mail"
+							value="#{editAccountView.email}"  styleClass="#{editAccountView.emailValid and component.valid ? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Passwort</span>
+						<h:inputSecret id="password" label="Passwort" value="#{editAccountView.password}" styleClass="#{editAccountView.passwordValid and component.valid ? '' : 'input-error'}">
+							<f:converter for="input" converterId="passwordConverter" />
+						</h:inputSecret>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Passwort wiederholen</span>
+						<h:inputSecret id="confirmPassword" label="Passwort wiederholen" value="#{editAccountView.confirmPassword}" styleClass="#{editAccountView.confirmPasswordValid and component.valid ? '' : 'input-error'}">
+							<f:converter converterId="passwordConverter" />
+						</h:inputSecret>
+					</label>
+				</li>
+				<li class="input-container">
+					<h:commandButton value="Save" action="#{editAccountView.save()}">
+						
+					</h:commandButton>
+				</li>
+			</ul>
+		</h:form>
+	</ui:define>
+</ui:composition>

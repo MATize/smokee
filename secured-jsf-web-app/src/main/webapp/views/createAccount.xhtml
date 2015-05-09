@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		<h3>
+			<h:outputText value="#{createAccountView.viewName()}"></h:outputText>
+		</h3>
+		<h:form id="#{createAccountView.formId()}">
+			<ul>
+				<li class="input-container">
+					<label>
+						<span>Vorname</span>
+						<h:inputText 
+							id="vorname" label="Vorname" value="#{createAccountView.vorname}" styleClass="#{createAccountView.vornameValid and component.valid ? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Nachname</span>
+						<h:inputText
+							id="nachname" label="Nachname" value="#{createAccountView.nachname}"  styleClass="#{createAccountView.nachnameValid and component.valid ? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>E-Mail</span>
+						<h:inputText id="email" label="E-Mail"
+							value="#{createAccountView.email}"  styleClass="#{createAccountView.emailValid and component.valid ? '' : 'input-error'}"></h:inputText>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Passwort</span>
+						<h:inputSecret id="password" label="Passwort" value="#{createAccountView.password}" styleClass="#{createAccountView.passwordValid and component.valid ? '' : 'input-error'}">
+							<f:converter for="input" converterId="passwordConverter" />
+						</h:inputSecret>
+					</label>
+				</li>
+				<li class="input-container">
+					<label>
+						<span>Passwort wiederholen</span>
+						<h:inputSecret id="confirmPassword" label="Passwort wiederholen" value="#{createAccountView.confirmPassword}" styleClass="#{createAccountView.confirmPasswordValid and component.valid ? '' : 'input-error'}">
+							<f:converter converterId="passwordConverter" />
+						</h:inputSecret>
+					</label>
+				</li>
+				<li class="input-container">
+					<h:commandButton value="Register" action="#{createAccountView.createAccount()}"></h:commandButton>
+				</li>
+			</ul>
+		</h:form>
+	</ui:define>
+</ui:composition>

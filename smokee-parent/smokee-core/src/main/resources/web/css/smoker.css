@@ -1,0 +1,29 @@
+* {
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+
+label {
+	display: block;
+	width: 80px;
+	float: left;
+}
+
+
+input.form.input {
+	width: 120px;
+	margin-bottom: 6px;
+}
+input.form.input.apikey {
+	width: 250px;
+}
+
+.hidden {
+	display: none;
+}
+
+#resultlist {
+	display: none;
+}
+
+
+

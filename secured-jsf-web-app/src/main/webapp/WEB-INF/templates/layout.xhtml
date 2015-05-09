@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF PassiveView Example</title>
+	<h:outputStylesheet library="css" name="application.css" />
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+			<h1>TestApp Header</h1>
+		</ui:insert>
+	</div>
+	<div id="content">
+		<h:panelGroup rendered="#{not empty facesContext.messageList}" styleClass="messages-container" layout="block">
+			<h:messages infoClass="messages-info" warnClass="messages-warn"
+				errorClass="messages-error" fatalClass="messages-fatal" />
+		</h:panelGroup>
+		<ui:insert name="content" />
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			<h:outputText value="FOOTER" />
+		</ui:insert>
+	</div>
+</h:body>
+</html>

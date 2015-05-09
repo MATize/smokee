@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		<h3>
+			<h:outputText value="#{listAccountView.viewName()}"></h:outputText>
+		</h3>
+		<h:form id="#{listAccountView.formId()}">
+			<h:dataTable value="#{listAccountView.accounts}" var="account">
+				<h:column>
+					<!-- column id -->
+					<f:facet name="header">ID</f:facet>
+					<!-- row record -->
+    				<h:outputText value="#{account.id}" />
+    			</h:column>
+				<h:column>
+					<!-- column email -->
+					<f:facet name="header">E-Mail</f:facet>
+					<!-- row record -->
+    				<h:outputText value="#{account.email}" />
+    			</h:column>
+				<h:column>
+					<!-- column vorname -->
+					<f:facet name="header">Vorname</f:facet>
+					<!-- row record -->
+    				<h:outputText value="#{account.vorname}" />
+    			</h:column>
+				<h:column>
+					<!-- column email -->
+					<f:facet name="header">Nachname</f:facet>
+					<!-- row record -->
+    				<h:outputText value="#{account.nachname}" />
+    			</h:column>
+				<h:column>
+					<!-- column actions -->
+					<f:facet name="header">Aktionen</f:facet>
+					<!-- row record -->
+					<h:link value="Editieren" outcome="#{editAccountView.viewName()}">
+						<f:param name="#{editAccountView.getUrlParamId()}" value="#{account.id}" />
+					</h:link> | 
+    				<h:commandLink action="#{editAccountView.delete(account.id)}">Löschen</h:commandLink>
+    			</h:column>
+			</h:dataTable>
+		</h:form>
+		
+		<h:link id="createAccountLink" value="Anlegen" outcome="#{createAccountView.viewName()}"></h:link>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,1 @@
+/subsystem=naming/binding=java\:app\/at\/itsv\/tools\/smoker\/scan.package:add(binding-type="simple", value="at.mount.matize.itsv.webapp")

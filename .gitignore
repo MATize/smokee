@@ -1,0 +1,11 @@
+target/
+Thumbs.db
+Desktop.ini
+*.class
+*.jar
+*.war
+*.ear
+.project
+.metadata
+.classpath
+.settings/
