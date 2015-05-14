@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" lang="de">
+<h:head>
+
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Demoapplikation für Smoketesting Framework SmokEE" />
+ <meta name="author" content="Matthias Walchhofer &lt;matize@mount.at&gt;" />
+
+ <!-- http://www.iconsdb.com/black-icons/smoke-explosion-icon.html -->
+ <link rel="shortcut icon" href="#{resource['img:smokee.ico']}" type="image/x-icon" />
+ <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+ <h:outputStylesheet library="css" name="application.css" />
+
+ <ui:insert name="html_head"></ui:insert>
+
+</h:head>
+
+<h:body>
+
+ <ui:include name="navigation" src="/WEB-INF/templates/navigation.xhtml">
+  <ui:param name="pageTitle" value="SmokEE - Demoapp"></ui:param>
+ </ui:include>
+
+ <div class="container">
+
+  <div class="smokee-content">
+  
+   <ui:insert name="content" />
+  
+  </div>
+  
+ </div>
+
+
+ <!-- Bootstrap core JavaScript -->
+ <h:outputScript library="js/jquery/1.11.3" name="jquery.min.js" />
+
+ <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+
+</h:body>
+</html>

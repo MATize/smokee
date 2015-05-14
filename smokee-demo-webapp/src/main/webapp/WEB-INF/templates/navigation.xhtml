@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+     <span class="sr-only">Toggle navigation</span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">#{pageTitle}</a>
+   </div>
+   <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+     <li class="#{navigation.isActive(navigation.uebersicht)}"><h:link value="#{msg['default.menu.uebersicht']}" outcome="#{navigation.uebersicht}" /></li>
+     <li class="#{navigation.isActive(navigation.suchen)}"><h:link value="#{msg['default.menu.suchen']}" outcome="#{navigation.suchen}" /></li>
+     <li class="#{navigation.isActive(navigation.neu)}"><h:link value="#{msg['default.menu.neu']}" outcome="#{navigation.neu}" /></li>
+    </ul>
+   </div>
+  </div>
+ </nav>
+</ui:composition>
