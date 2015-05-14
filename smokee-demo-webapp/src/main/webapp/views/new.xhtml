@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/WEB-INF/templates/default.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
-	
-	<ui:define name="html_head">
-		<title>Uebersicht</title>
-	</ui:define>
-	
-	<ui:define name="content">
-		<h1>SmokEE Test Applikation Uebersicht</h1>
-			<p class="lead">
-				Starten wir hier<br />
-					ganz toll.
-			</p>
-	</ui:define>
+<ui:composition template="/WEB-INF/templates/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+ >
+
+ <ui:define name="html_head">
+  <title>#{msg['default.title.neu']}</title>
+ </ui:define>
+
+ <ui:define name="content">
+  <h3>#{msg['default.title.neu']}</h3>
+  <h:messages />
+  <h:form>
+   <div class="form-group">
+    <label for="name">#{msg['rezept.create.input.name']}</label>
+    <h:inputText label="#{msg['rezept.create.input.name']}" styleClass="form-control" p:placeholder="#{msg['rezept.create.input.name.placeholder']}" value="#{rezept.name}"/>
+   </div>
+   <div class="form-group">
+    <label for="beschreibung">#{msg['rezept.create.input.beschreibung']}</label>
+    <h:inputTextarea label="#{msg['rezept.create.input.beschreibung']}" value="#{rezept.beschreibung}" styleClass="form-control" id="beschreibung" p:placeholder="#{msg['rezept.create.input.beschreibung.placeholder']}" />
+   </div>
+   <h:commandButton styleClass="btn btn-default" value="#{msg['rezept.create.button.speichern']}" action="#{rezeptCtrl.create}"/>
+  </h:form>
+ </ui:define>
+
 </ui:composition>

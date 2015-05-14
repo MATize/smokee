@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" lang="de">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" lang="en">
 <h:head>
 
  <meta charset="utf-8" />
@@ -24,12 +24,15 @@
   <ui:param name="pageTitle" value="SmokEE - Demoapp"></ui:param>
  </ui:include>
 
- <div class="container">
+ <div class="container-fluid">
 
-  <div class="smokee-content">
-  
-   <ui:insert name="content" />
-  
+  <div class="row">
+   <div class="col-md-10">
+    <ui:insert name="content" />   
+   </div>
+   <div class="col-md-2">
+    <ui:include name="sidebar" src="/WEB-INF/templates/sidebar.xhtml"/>
+   </div>
   </div>
   
  </div>
