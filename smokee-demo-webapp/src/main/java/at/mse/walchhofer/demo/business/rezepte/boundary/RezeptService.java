@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 import at.mse.walchhofer.demo.business.rezepte.control.RezeptValidator;
 import at.mse.walchhofer.demo.business.rezepte.entity.Rezept;
 
@@ -20,7 +21,11 @@ public class RezeptService {
     EntityManager entityManager;
 
     public List<Rezept> getAll() {
-        return entityManager.createNamedQuery("Rezept.findAll", Rezept.class).getResultList();
+        List<Rezept> resultList = entityManager.createNamedQuery("Rezept.findAll", Rezept.class).getResultList();
+        resultList.forEach(elem -> {
+            entityManager.detach(elem);
+        });
+        return resultList;
     }
 
     public Rezept getById(Long id) {
@@ -65,6 +70,11 @@ public class RezeptService {
             return false;
         }
 
+    }
+
+    public void create(Bild bild2create) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

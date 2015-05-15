@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition template="/WEB-INF/templates/default.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
- xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
- xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
- >
+ xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
  <ui:define name="html_head">
   <title>#{msg['default.title.neu']}</title>
@@ -11,17 +9,41 @@
  <ui:define name="content">
   <h3>#{msg['default.title.neu']}</h3>
   <h:messages />
-  <h:form>
+  <h:form enctype="multipart/form-data" id="createRezept">
    <div class="form-group">
     <label for="name">#{msg['rezept.create.input.name']}</label>
-    <h:inputText label="#{msg['rezept.create.input.name']}" styleClass="form-control" p:placeholder="#{msg['rezept.create.input.name.placeholder']}" value="#{rezept.name}"/>
+    <h:inputText label="#{msg['rezept.create.input.name']}" styleClass="form-control" p:placeholder="#{msg['rezept.create.input.name.placeholder']}"
+     value="#{rezept.name}" />
    </div>
    <div class="form-group">
     <label for="beschreibung">#{msg['rezept.create.input.beschreibung']}</label>
-    <h:inputTextarea label="#{msg['rezept.create.input.beschreibung']}" value="#{rezept.beschreibung}" styleClass="form-control" id="beschreibung" p:placeholder="#{msg['rezept.create.input.beschreibung.placeholder']}" />
+    <h:inputTextarea label="#{msg['rezept.create.input.beschreibung']}" value="#{rezept.beschreibung}" styleClass="form-control" id="beschreibung"
+     p:placeholder="#{msg['rezept.create.input.beschreibung.placeholder']}" />
    </div>
-   <h:commandButton styleClass="btn btn-default" value="#{msg['rezept.create.button.speichern']}" action="#{rezeptCtrl.create}"/>
+   <div class="form-group">
+    <label for="file">#{msg['rezept.create.input.bild']}</label>
+    <h:inputFile label="#{msg['rezept.create.input.bild']}" value="#{rezept.file}" id="file" style="display:none;" />
+    <input type="text" id="filehelper" class="form-control" readonly="readonly" placeholder="#{msg['rezept.create.input.bild.placeholder']}"/>
+   </div>
+   <div class="form-group">
+    <label for="autor">#{msg['rezept.create.input.autor']}</label>
+    <h:inputText label="#{msg['rezept.create.input.autor']}" value="#{rezept.autor}" styleClass="form-control" id="autor"
+     p:placeholder="#{msg['rezept.create.input.autor.placeholder']}" />
+   </div>
+   <h:commandButton styleClass="btn btn-default" value="#{msg['rezept.create.button.speichern']}" action="#{rezeptCtrl.create}" />
   </h:form>
  </ui:define>
 
+ <ui:define name="js">
+  <script type="text/javascript">
+	$(document).ready(function() {
+		$('#filehelper').click(function() {
+			$('input[id="createRezept:file"]').click();
+		});
+		$('input[id="createRezept:file"]').change(function() {
+			$('#filehelper').val($(this).val());
+		});
+	});
+  </script>
+ </ui:define>
 </ui:composition>

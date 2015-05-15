@@ -3,26 +3,17 @@
  <h4>
   <h:outputText value="#{msg['default.sidebar.title']}" />
  </h4>
- <div class="panel panel-default">
-  <div class="panel-heading">
-   <h5 class="panel-title">Tepanyaki Spießchen</h5>
-  </div>
-  <div class="panel-body">
-   <h:graphicImage value="#{resource['img:tepanyaki.jpg']}" styleClass="img-thumbnail"/>
-  </div>
-  <div class="panel-footer">
-   <small>Von: Matthias Walchhofer (XX.XX.XXXX - hh:mm:ss)</small>
-  </div>
- </div>
- <div class="panel panel-default">
-  <div class="panel-heading">
-   <h5 class="panel-title">Yaki Tori</h5>
-  </div>
-  <div class="panel-body">
-   <h:graphicImage value="#{resource['img:yaki_tori.jpg']}" styleClass="img-thumbnail" />
-  </div>
-  <div class="panel-footer">
-   <small>Von: Matthias Walchhofer (XX.XX.XXXX - hh:mm:ss)</small>
-  </div>
- </div>
+ <ui:repeat value="#{sideBar.neueRezepte}" var="neuesRezept">
+  <div class="panel panel-default">
+   <div class="panel-heading">
+    <h5 class="panel-title">#{neuesRezept.name}</h5>
+   </div>
+   <div class="panel-body">
+    <h:graphicImage value="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/images?id=#{neuesRezept.randomBild.id}" styleClass="img-thumbnail" />
+   </div>
+   <div class="panel-footer">
+    <small>Von: #{neuesRezept.autor} #{neuesRezept.erstelltAm}</small>
+   </div>
+  </div> 
+ </ui:repeat>
 </ui:composition>
