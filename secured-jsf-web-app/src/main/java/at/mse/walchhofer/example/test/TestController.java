@@ -3,8 +3,8 @@ package at.mse.walchhofer.example.test;
 import javax.ejb.EJB;
 
 import at.mse.walchhofer.example.services.TestBean;
-import at.mse.walchhofer.smokee.api.SmokeParam;
-import at.mse.walchhofer.smokee.api.SmokeParam.SmokeParamType;
+import at.mse.walchhofer.smokee.api.SmokeValue;
+import at.mse.walchhofer.smokee.api.SmokeValue.SmokeValueType;
 import at.mse.walchhofer.smokee.api.SmokeTest;
 
 public class TestController {
@@ -13,16 +13,16 @@ public class TestController {
 	TestBean bean;
 
 	@SmokeTest(parameters = {
-			@SmokeParam(type = SmokeParamType.STRING, value = "Teststring"),
-			@SmokeParam(type = SmokeParamType.BOOLEAN, value = "true") })
+			@SmokeValue(type = SmokeValueType.STRING, value = "Teststring"),
+			@SmokeValue(type = SmokeValueType.BOOLEAN, value = "true") })
 	private boolean testBooleanWithParam(String testValue, Boolean testFlag) {
 		return testFlag;
 	}
 
-	@SmokeTest(expectedReturn =
-			@SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"),
+	@SmokeTest(expectedResult =
+			@SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"),
 		parameters = {
-			@SmokeParam(type = SmokeParamType.LONG, value = "-1")})
+			@SmokeValue(type = SmokeValueType.LONG, value = "-1")})
 	private boolean loescheBenutzerById(Long id) {
 		return bean.loescheBenutzerById(id);
 	}
@@ -37,13 +37,13 @@ public class TestController {
 	private void erstelleBenutzer2() {
 	}
 
-	@SmokeTest(expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"))
+	@SmokeTest(expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"))
 	private boolean loescheBenutzer() {
 		// Loesch-Logik
 		return true;
 	}
 
-	@SmokeTest(name = "nestedStateless", expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"), rollback = true, enabled = true)
+	@SmokeTest(name = "nestedStateless", expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), rollback = true, enabled = true)
 	private boolean testNestedStateless() {
 		try {
 			bean.testStatelessNested();
@@ -54,8 +54,8 @@ public class TestController {
 	}
 
 	@SmokeTest(name = "testNestedStatelessNewTransaction",
-			expectedReturn =
-				@SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"),
+			expectedResult =
+				@SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"),
 			rollback = true)
 	private boolean testNestedStatelessNewTransaction() {
 		try {
@@ -71,7 +71,7 @@ public class TestController {
 		throw new RuntimeException("This exception shall never be thrown!");
 	}
 
-	@SmokeTest(name = "testNestedStatefullTransaction", expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"), rollback = true, enabled = true)
+	@SmokeTest(name = "testNestedStatefullTransaction", expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), rollback = true, enabled = true)
 	private boolean testNestedStatefulTransaction() {
 		try {
 			bean.testStatefulNested();
@@ -81,7 +81,7 @@ public class TestController {
 		}
 	}
 
-	@SmokeTest(name = "testNestedStatelessNewTransaction", expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"), rollback = true, enabled = true)
+	@SmokeTest(name = "testNestedStatelessNewTransaction", expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), rollback = true, enabled = true)
 	private boolean testNestedStatefulNewTransaction() {
 		try {
 			bean.testStatefulNestedNew();
@@ -91,7 +91,7 @@ public class TestController {
 		}
 	}
 
-	@SmokeTest(name = "testNestedSingletonTransaction", expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"), rollback = true, enabled = true)
+	@SmokeTest(name = "testNestedSingletonTransaction", expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), rollback = true, enabled = true)
 	private boolean testNestedSingletonTransaction() {
 		try {
 			bean.testSingletonNested();
@@ -101,7 +101,7 @@ public class TestController {
 		}
 	}
 
-	@SmokeTest(name = "testNestedSingletonNewTransaction", expectedReturn = @SmokeParam(type = SmokeParamType.BOOLEAN, value = "true"), rollback = true, enabled = true)
+	@SmokeTest(name = "testNestedSingletonNewTransaction", expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), rollback = true, enabled = true)
 	private boolean testNestedSingletonNewTransaction() {
 		try {
 			bean.testSingletonNestedNew();

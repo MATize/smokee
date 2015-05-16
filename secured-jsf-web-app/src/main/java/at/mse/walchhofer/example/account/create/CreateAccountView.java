@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 import at.mse.walchhofer.example.account.AccountView;
 import at.mse.walchhofer.example.account.list.ListAccountView;
 import at.mse.walchhofer.example.services.IUserManagementService;
-import at.mse.walchhofer.smokee.api.SmokeParam;
-import at.mse.walchhofer.smokee.api.SmokeParam.SmokeParamType;
+import at.mse.walchhofer.smokee.api.SmokeValue;
+import at.mse.walchhofer.smokee.api.SmokeValue.SmokeValueType;
 import at.mse.walchhofer.smokee.api.SmokeTest;
 
 @Model
@@ -143,7 +143,7 @@ ICreateAccountView {
 		return confirmPasswordValid;
 	}
 
-	@SmokeTest(expectedReturn=@SmokeParam(value="true", type=SmokeParamType.BOOLEAN),rollback=true, enabled=true)
+	@SmokeTest(expectedResult=@SmokeValue(value="true", type=SmokeValueType.BOOLEAN),rollback=true, enabled=true)
 	private boolean testCreate() {
 		this.init();
 		this.setVorname("Matthias");
@@ -155,7 +155,7 @@ ICreateAccountView {
 		return result != null && result.equals(this.createAccountSuccess());
 	}
 	
-	@SmokeTest(expectedReturn=@SmokeParam(value="true", type=SmokeParamType.BOOLEAN),rollback=true, enabled=true)
+	@SmokeTest(expectedResult=@SmokeValue(value="true", type=SmokeValueType.BOOLEAN),rollback=true, enabled=true)
 	private boolean testCreateFail() {
 		this.init();
 		this.setVorname("Matthias");

@@ -21,6 +21,8 @@ import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 @Entity
 @NamedQueries({
     @NamedQuery(name="Rezept.findAll",
+            query="SELECT r FROM Rezept r"),
+    @NamedQuery(name="Rezept.findAll.OrderByCreateDate",
             query="SELECT r FROM Rezept r")
 })
 public class Rezept {

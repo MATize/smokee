@@ -16,7 +16,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 
 import at.mse.walchhofer.smokee.TestSuite;
 import at.mse.walchhofer.smokee.api.SmokeCache;
-import at.mse.walchhofer.smokee.api.SmokeParam;
+import at.mse.walchhofer.smokee.api.SmokeValue;
 import at.mse.walchhofer.smokee.api.SmokeTest;
 import at.mse.walchhofer.smokee.api.SmokerStatus;
 import at.mse.walchhofer.smokee.api.caching.ISmokEEJCache;
@@ -105,10 +105,10 @@ public class SmokeService {
 		}
 
 		// Parameter Liste erzeugen
-		SmokeParam[] parameterList = smokeAnnotation.parameters();
+		SmokeValue[] parameterList = smokeAnnotation.parameters();
 		Object[] params = new Object[parameterList.length];
 		int i = 0;
-		for (SmokeParam smokeParam : parameterList) {
+		for (SmokeValue smokeParam : parameterList) {
 			log.info("Value: " + smokeParam.value());
 			log.info("Type: " + smokeParam.type().getClazz());
 			Object p = ConvertUtils.convert(smokeParam.value(), smokeParam
@@ -138,12 +138,12 @@ public class SmokeService {
 			timer.stop();
 			result.setLastRun(Calendar.getInstance().getTime());
 			result.setElapsedTime(timer.getElapsedTime());
-			if (!smokeAnnotation.expectedReturn().type().getClazz()
+			if (!smokeAnnotation.expectedResult().type().getClazz()
 					.equals(Void.class)) {
 				if (ret != null) {
 					Object expected = ConvertUtils.convert(smokeAnnotation
-							.expectedReturn().value(), smokeAnnotation
-							.expectedReturn().type().getClazz());
+							.expectedResult().value(), smokeAnnotation
+							.expectedResult().type().getClazz());
 					result.setPassed(expected != null && expected.equals(ret));
 				} else {
 					result.setPassed(false);

@@ -15,7 +15,8 @@
 		</ui:insert>
 	</div>
 	<div id="content">
-		<h:panelGroup rendered="#{not empty facesContext.messageList}" styleClass="messages-container" layout="block">
+		<h:panelGroup rendered="#{not empty facesContext.messageList}"
+			styleClass="messages-container" layout="block">
 			<h:messages infoClass="messages-info" warnClass="messages-warn"
 				errorClass="messages-error" fatalClass="messages-fatal" />
 		</h:panelGroup>

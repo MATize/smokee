@@ -21,7 +21,7 @@ public class RezeptService {
     EntityManager entityManager;
 
     public List<Rezept> getAll() {
-        List<Rezept> resultList = entityManager.createNamedQuery("Rezept.findAll", Rezept.class).getResultList();
+        List<Rezept> resultList = entityManager.createNamedQuery("Rezept.findAll.OrderByCreateDate", Rezept.class).getResultList();
         resultList.forEach(elem -> {
             entityManager.detach(elem);
         });

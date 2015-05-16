@@ -12,8 +12,8 @@ import at.mount.matize.jsf.UrlParamStore;
 import at.mse.walchhofer.example.account.AccountView;
 import at.mse.walchhofer.example.account.IAccountView;
 import at.mse.walchhofer.example.services.IUserManagementService;
-import at.mse.walchhofer.smokee.api.SmokeParam;
-import at.mse.walchhofer.smokee.api.SmokeParam.SmokeParamType;
+import at.mse.walchhofer.smokee.api.SmokeValue;
+import at.mse.walchhofer.smokee.api.SmokeValue.SmokeValueType;
 import at.mse.walchhofer.smokee.api.SmokeTest;
 
 @Model
@@ -78,7 +78,7 @@ public class ListAccountView extends AccountView implements IListAccountView {
 	}
 
 
-	@SmokeTest(expectedReturn=@SmokeParam(type=SmokeParamType.BOOLEAN,value="true"),enabled=true)
+	@SmokeTest(expectedResult=@SmokeValue(type=SmokeValueType.BOOLEAN,value="true"),enabled=true)
 	private boolean testInit() {
 		//da init @PostConstruct ist wurde sie zum testzeitpunkt bereits aufgerufen
 		// dies ermöglicht das ergebnis direkt zu ueberpruefen ohne einen expliziten aufruf der methode durchzuführen

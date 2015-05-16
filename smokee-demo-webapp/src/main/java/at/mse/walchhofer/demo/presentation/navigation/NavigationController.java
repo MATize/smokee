@@ -9,9 +9,9 @@ import javax.inject.Named;
 @ApplicationScoped
 public class NavigationController {
 
-    private String uebersicht = "/views/overview";
-    private String suchen = "/views/search";
-    private String neu = "/views/new";
+    private String uebersicht = "/views/overview?faces-redirect=true";
+    private String suchen = "/views/search?faces-redirect=true";
+    private String neu = "/views/new?faces-redirect=true";
 
     
     @Inject

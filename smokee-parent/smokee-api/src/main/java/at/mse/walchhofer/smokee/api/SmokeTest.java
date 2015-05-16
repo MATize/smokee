@@ -50,7 +50,7 @@ public @interface SmokeTest {
 
 	/**
 	 * <p>
-	 * Eine Liste von Parametern vom Typ {@link SmokeParam}
+	 * Eine Liste von Parametern vom Typ {@link SmokeValue}
 	 * </p>
 	 * <p>
 	 * Die Parameter werden beim Durchfuehren des Tests der annotierten Methode
@@ -65,10 +65,10 @@ public @interface SmokeTest {
 	 *  <code>
 	 *   {@literal @}SmokeTest(name="testMethod1", parameters = {
 	 *    {@literal @}SmokeParam(
-	 *     type = {@link SmokeParam.SmokeParamType#STRING},
+	 *     type = {@link SmokeValue.SmokeValueType#STRING},
 	 *     value = "Teststring"),
 	 *    {@literal @}SmokeParam(
-	 *     type = {@link SmokeParam.SmokeParamType#BOOLEAN},
+	 *     type = {@link SmokeValue.SmokeValueType#BOOLEAN},
 	 *     value = "true") })
 	 *   private boolean testMethod(String testValue, Boolean testFlag) {}
 	 * 	</code>
@@ -76,16 +76,16 @@ public @interface SmokeTest {
 	 * 
 	 * </p>
 	 */
-	public SmokeParam[] parameters() default {};
+	public SmokeValue[] parameters() default {};
 	
 	/**
 	 * <p>
 	 * Definiert den erwarteten Rueckgabewert des Testaufrufes
 	 * </p>
 	 * <p>
-	 * Hierfuer wird der Parameter vom Typ {@link SmokeParam} verwendet.</br>
+	 * Hierfuer wird der Parameter vom Typ {@link SmokeValue} verwendet.</br>
 	 * Soll eine Methode ohne Rueckgabe-Parameter getestet werden, kann
-	 * {@link SmokeParam.SmokeParamType#VOID} verwendet werden.
+	 * {@link SmokeValue.SmokeValueType#VOID} verwendet werden.
 	 * </p>
 	 * <p>
 	 * <strong>Beispiel:</strong><br />
@@ -94,7 +94,7 @@ public @interface SmokeTest {
 	 *  <code>
 	 *   {@literal @}SmokeTest(expectedReturn=
 	 *    {@literal @}SmokeParam(
-	 *     type = {@link SmokeParam.SmokeParamType#BOOLEAN},
+	 *     type = {@link SmokeValue.SmokeValueType#BOOLEAN},
 	 *     value = "true"))
 	 *   private boolean testMethod() {}
 	 *  </code>
@@ -102,7 +102,7 @@ public @interface SmokeTest {
 	 * 
 	 * </p>
 	 */
-	public SmokeParam expectedReturn() default @SmokeParam();
+	public SmokeValue expectedResult() default @SmokeValue();
 
 	/**
 	 * <p>
