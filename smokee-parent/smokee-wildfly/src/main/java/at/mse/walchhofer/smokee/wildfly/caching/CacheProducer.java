@@ -16,38 +16,34 @@ import at.mse.walchhofer.smokee.api.SmokeCache;
 @Startup
 public class CacheProducer {
 
-	public static Long CACHE_TTL = 300 * 1000L;
+    public static Long CACHE_TTL = 300 * 1000L;
 
-	private EmbeddedCacheManager defaultCacheManager;
-	private JCacheWrapper wrapper;
+    private EmbeddedCacheManager defCacheManager;
+    private JCacheWrapper wrapper;
 
-	@Produces
-	@SmokeCache
-	public JCacheWrapper getCache() {
-		if (defaultCacheManager == null) {
-			defaultCacheManager = new DefaultCacheManager(
-					new ConfigurationBuilder().expiration().lifespan(CACHE_TTL)
-							.build());
-		}
-		if (wrapper == null) {
-			wrapper = new JCacheWrapper(defaultCacheManager.getCache(
-					"smokeTestResults", true));
-		}
-		return wrapper;
-	}
+    @Produces
+    @SmokeCache
+    public JCacheWrapper getCache() {
+        init();
+        return wrapper;
+    }
 
-	@PostConstruct
-	public void init() {
-		defaultCacheManager = new DefaultCacheManager(
-				new ConfigurationBuilder().expiration().lifespan(CACHE_TTL)
-						.build());
-		wrapper = new JCacheWrapper(defaultCacheManager.getCache(
-				"smokeTestResults", true));
-	}
+    @PostConstruct
+    public void init() {
+        if (defCacheManager == null) {
+            defCacheManager = new DefaultCacheManager(
+                    new ConfigurationBuilder().expiration().lifespan(CACHE_TTL)
+                            .build());
+        }
+        if (wrapper == null) {
+            wrapper = new JCacheWrapper(defCacheManager.getCache(
+                    "smokeTestResults", true));
+        }
+    }
 
-	@PreDestroy
-	public void destruct() {
-		wrapper.kill();
-		defaultCacheManager.stop();
-	}
+    @PreDestroy
+    public void destruct() {
+        wrapper.kill();
+        defCacheManager.stop();
+    }
 }

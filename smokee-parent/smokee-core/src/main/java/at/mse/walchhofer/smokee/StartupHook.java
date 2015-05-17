@@ -8,8 +8,8 @@ import javax.ejb.Startup;
 @Startup
 public class StartupHook {
 
-	@PostConstruct
-	public void setup() {
-		System.out.println("Applikation started!");
-	}
+    @PostConstruct
+    public void setup() {
+        System.out.println("Applikation started!");
+    }
 }

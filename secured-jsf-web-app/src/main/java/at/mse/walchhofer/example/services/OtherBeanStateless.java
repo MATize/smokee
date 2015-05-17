@@ -17,41 +17,41 @@ import at.mse.walchhofer.example.jpa.model.ApplBenutzer;
 @Stateless
 public class OtherBeanStateless {
 
-	@PersistenceContext(unitName = "thePersistenceUnit")
-	EntityManager entityManager;
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void createApplBenutzerNewTransaction() {
-		ApplBenutzer aBenutzer = new ApplBenutzer();
-		aBenutzer.setVorname("@Stateless");
-		entityManager.persist(aBenutzer);
-		entityManager.flush();
-	}
-	
-	public void createApplBenutzer() {
-		ApplBenutzer aBenutzer = new ApplBenutzer();
-		aBenutzer.setVorname("@Stateless");
-		entityManager.persist(aBenutzer);
-		entityManager.flush();
-	}
-	
-	public List<ApplBenutzer> getBenutzerByVornameJPQL(String vorname) {
-		String query = "SELECT b FROM ApplBenutzer b where b.vorname = :vorname";
-		TypedQuery<ApplBenutzer> createQuery = entityManager.createQuery(query,
-				ApplBenutzer.class);
-		createQuery.setParameter("vorname", vorname);
-		return createQuery.getResultList();
-	}
+    @PersistenceContext(unitName = "thePersistenceUnit")
+    EntityManager entityManager;
 
-	public List<ApplBenutzer> getBenutzerByNameVornameCriteria(String name) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<ApplBenutzer> benutzerQuery = criteriaBuilder
-				.createQuery(ApplBenutzer.class);
-		Root<ApplBenutzer> from = criteriaBuilder.createQuery(ApplBenutzer.class).from(
-				ApplBenutzer.class);
-		return entityManager.createQuery(
-				benutzerQuery.where(criteriaBuilder.equal(from.get("vorname"),
-						name))).getResultList();
-	}
-	
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void createApplBenutzerNewTransaction() {
+        ApplBenutzer aBenutzer = new ApplBenutzer();
+        aBenutzer.setVorname("@Stateless");
+        entityManager.persist(aBenutzer);
+        entityManager.flush();
+    }
+
+    public void createApplBenutzer() {
+        ApplBenutzer aBenutzer = new ApplBenutzer();
+        aBenutzer.setVorname("@Stateless");
+        entityManager.persist(aBenutzer);
+        entityManager.flush();
+    }
+
+    public List<ApplBenutzer> getBenutzerByVornameJPQL(String vorname) {
+        String query = "SELECT b FROM ApplBenutzer b where b.vorname = :vorname";
+        TypedQuery<ApplBenutzer> createQuery = entityManager.createQuery(query,
+                ApplBenutzer.class);
+        createQuery.setParameter("vorname", vorname);
+        return createQuery.getResultList();
+    }
+
+    public List<ApplBenutzer> getBenutzerByNameVornameCriteria(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ApplBenutzer> benutzerQuery = criteriaBuilder
+                .createQuery(ApplBenutzer.class);
+        Root<ApplBenutzer> from = criteriaBuilder.createQuery(ApplBenutzer.class).from(
+                ApplBenutzer.class);
+        return entityManager.createQuery(
+                benutzerQuery.where(criteriaBuilder.equal(from.get("vorname"),
+                        name))).getResultList();
+    }
+
 }

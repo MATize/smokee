@@ -12,10 +12,10 @@ import javax.inject.Named;
 public class SidebarViewModel {
 
     private List<RezeptViewModel> neueRezepte;
-    
+
     @Inject
     RezeptListController rezeptListController;
-    
+
     @PostConstruct
     public void init() {
         setNeueRezepte(rezeptListController.neuesteRezepte());
@@ -28,5 +28,5 @@ public class SidebarViewModel {
     public void setNeueRezepte(List<RezeptViewModel> neueRezepte) {
         this.neueRezepte = neueRezepte;
     }
-    
+
 }

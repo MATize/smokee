@@ -2,11 +2,13 @@ package at.mse.walchhofer.demo.business.rezepte.boundary;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import at.mse.walchhofer.demo.business.bilder.boundary.BildService;
 import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 import at.mse.walchhofer.demo.business.rezepte.control.RezeptValidator;
 import at.mse.walchhofer.demo.business.rezepte.entity.Rezept;
@@ -17,8 +19,11 @@ public class RezeptService {
     @Inject
     RezeptValidator validator;
 
-    @PersistenceContext(unitName="rezeptUnit")
+    @PersistenceContext(unitName = "rezeptUnit")
     EntityManager entityManager;
+
+    @EJB
+    BildService bildService;
 
     public List<Rezept> getAll() {
         List<Rezept> resultList = entityManager.createNamedQuery("Rezept.findAll.OrderByCreateDate", Rezept.class).getResultList();
@@ -36,9 +41,12 @@ public class RezeptService {
         return rezept;
     }
 
-    public Rezept create(Rezept rezept) {
+    public Rezept create(Rezept rezept, Bild bild2create) {
         if (validator.isValid(rezept)) {
             entityManager.persist(rezept);
+            entityManager.flush();
+            bild2create.setRezept(rezept);
+            bildService.create(bild2create);
             entityManager.flush();
             entityManager.detach(rezept);
             return rezept;
@@ -74,7 +82,7 @@ public class RezeptService {
 
     public void create(Bild bild2create) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

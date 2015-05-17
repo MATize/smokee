@@ -20,35 +20,33 @@ import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Rezept.findAll",
-            query="SELECT r FROM Rezept r"),
-    @NamedQuery(name="Rezept.findAll.OrderByCreateDate",
-            query="SELECT r FROM Rezept r")
+        @NamedQuery(name = "Rezept.findAll",
+                query = "SELECT r FROM Rezept r"),
+        @NamedQuery(name = "Rezept.findAll.OrderByCreateDate",
+                query = "SELECT r FROM Rezept r")
 })
 public class Rezept {
 
-
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     private String titel;
-    
+
     @NotNull
     private String anleitung;
-    
+
     @NotNull
     private String autor;
-    
+
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar erstelltAm;
-    
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="rezept") 
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rezept")
     private List<Bild> bilder;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -96,5 +94,5 @@ public class Rezept {
     public void setErstelltAm(Calendar erstelltAm) {
         this.erstelltAm = erstelltAm;
     }
-    
+
 }

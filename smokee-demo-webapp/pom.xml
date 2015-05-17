@@ -25,6 +25,18 @@
 			<version>1.7.2.redhat-3</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>at.mse.walchhofer.smokee</groupId>
+			<artifactId>smokee-core</artifactId>
+			<version>0.2.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>at.mse.walchhofer.smokee</groupId>
+			<artifactId>smokee-wildfly</artifactId>
+			<version>0.2.1</version>
+			<scope>compile</scope>
+		</dependency>
   </dependencies>
   
   <build>

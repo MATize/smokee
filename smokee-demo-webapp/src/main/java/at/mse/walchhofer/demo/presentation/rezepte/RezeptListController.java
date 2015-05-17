@@ -14,12 +14,12 @@ import at.mse.walchhofer.demo.business.rezepte.entity.Rezept;
 @Named("rezeptListCtrl")
 @RequestScoped
 public class RezeptListController {
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     @EJB
     RezeptService rezeptService;
-    
+
     public List<RezeptViewModel> neuesteRezepte() {
         List<RezeptViewModel> rezepteViewModel = new ArrayList<>();
         List<Rezept> rezepte = rezeptService.getAll();
@@ -36,5 +36,5 @@ public class RezeptListController {
         }
         return rezepteViewModel;
     }
-    
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <enumeration id="1" language="java" name="at.mse.walchhofer.smokee.api.SmokeValue.SmokeValueType" project="smokee-api" 
+    file="/smokee-api/src/main/java/at/mse/walchhofer/smokee/api/SmokeValue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="442" y="454"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <annotation id="2" language="java" name="at.mse.walchhofer.smokee.api.SmokeTest" project="smokee-api" 
+    file="/smokee-api/src/main/java/at/mse/walchhofer/smokee/api/SmokeTest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="237" x="94" y="158"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </annotation>  
+  <annotation id="3" language="java" name="at.mse.walchhofer.smokee.api.SmokeValue" project="smokee-api" 
+    file="/smokee-api/src/main/java/at/mse/walchhofer/smokee/api/SmokeValue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="140" x="371" y="158"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </annotation>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

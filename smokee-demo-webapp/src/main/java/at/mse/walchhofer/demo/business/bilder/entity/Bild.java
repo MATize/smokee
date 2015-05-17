@@ -21,8 +21,8 @@ import at.mse.walchhofer.demo.business.rezepte.entity.Rezept;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Bild.findAll",
-            query="SELECT b FROM Bild b")
+        @NamedQuery(name = "Bild.findAll",
+                query = "SELECT b FROM Bild b")
 })
 public class Bild {
 
@@ -30,20 +30,19 @@ public class Bild {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="rezept_id")
-    private
-    Rezept rezept;
-    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rezept_id")
+    private Rezept rezept;
+
     @NotNull
     private String mimeType;
 
     @NotNull
     private Long size;
-    
+
     @NotNull
     private String fileName;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar erstelltAm;
 
@@ -106,5 +105,5 @@ public class Bild {
     public void setRezept(Rezept rezept) {
         this.rezept = rezept;
     }
-    
+
 }

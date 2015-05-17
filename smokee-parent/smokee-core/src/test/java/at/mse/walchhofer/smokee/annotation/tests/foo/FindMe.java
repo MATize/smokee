@@ -4,14 +4,14 @@ import at.mse.walchhofer.smokee.api.SmokeTest;
 
 public class FindMe {
 
-	@SuppressWarnings("unused")
-	private void testMethod(String x) {
+    @SuppressWarnings("unused")
+    private void testMethod(String x) {
 
-	}
+    }
 
-	@SmokeTest
-	private void testMethod() {
+    @SmokeTest
+    private void testMethod() {
 
-	}
+    }
 
 }

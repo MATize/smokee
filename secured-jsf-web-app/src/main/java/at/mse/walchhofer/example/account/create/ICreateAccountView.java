@@ -4,8 +4,8 @@ import at.mse.walchhofer.example.account.IAccountFormView;
 
 public interface ICreateAccountView extends IAccountFormView {
 
-	String createAccountFailed();
+    String createAccountFailed();
 
-	String createAccountSuccess();
+    String createAccountSuccess();
 
 }

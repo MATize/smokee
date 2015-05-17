@@ -8,8 +8,8 @@ import javax.inject.Qualifier;
 
 /**
  * 
- * Qualifier fuer den Smoke-Test-Cache
- * Wird von SmokeService aus dem smokee-core artifact verwendet um die Abhaengigkeit fuer
+ * Qualifier fuer den Smoke-Test-Cache Wird von SmokeService aus dem smokee-core
+ * artifact verwendet um die Abhaengigkeit fuer
  * {@link at.mse.walchhofer.smokee.api.caching.ISmokEEJCache} aufzuloesen
  * 
  * @author <a href="mailto:matize@mount.at">Matthias Walchhofer</a>
@@ -18,4 +18,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface SmokeCache { }
+public @interface SmokeCache {
+}

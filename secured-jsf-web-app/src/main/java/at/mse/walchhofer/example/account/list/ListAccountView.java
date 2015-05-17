@@ -19,72 +19,73 @@ import at.mse.walchhofer.smokee.api.SmokeTest;
 @Model
 public class ListAccountView extends AccountView implements IListAccountView {
 
-	private List<IAccountView> accounts;
+    private List<IAccountView> accounts;
 
-	public static final String VIEW_ID = "listAccounts";
+    public static final String VIEW_ID = "listAccounts";
 
-	@Inject
-	FacesContext facesContext;
+    @Inject
+    FacesContext facesContext;
 
-	@Inject
-	UrlParamStore urlParamStore;
-	
-	@EJB
-	IUserManagementService userManagement;
+    @Inject
+    UrlParamStore urlParamStore;
 
-	private ListAccountController accountController;
-	
+    @EJB
+    IUserManagementService userManagement;
 
-	@PostConstruct
-	public void init() {
-		this.setAccountController(new ListAccountController(userManagement,
-				this));
-		super.setFacesContext(facesContext);
-		urlParamStore.disableUrlParams();
-		this.getAccountController().listBenutzer();
-	}
+    private ListAccountController accountController;
 
-	@Override
-	public List<IAccountView> getAccounts() {
-		return accounts;
-	}
+    @PostConstruct
+    public void init() {
+        this.setAccountController(new ListAccountController(userManagement,
+                this));
+        super.setFacesContext(facesContext);
+        urlParamStore.disableUrlParams();
+        this.getAccountController().listBenutzer();
+    }
 
-	@Override
-	public void setAccounts(List<IAccountView> accounts) {
-		this.accounts = accounts;
-	}
+    @Override
+    public List<IAccountView> getAccounts() {
+        return accounts;
+    }
 
-	@Override
-	public String getBaseClientId() {
-		return "" + formId();
-	}
+    @Override
+    public void setAccounts(List<IAccountView> accounts) {
+        this.accounts = accounts;
+    }
 
-	@Override
-	public String formId() {
-		return VIEW_ID;
-	}
+    @Override
+    public String getBaseClientId() {
+        return "" + formId();
+    }
 
-	@Override
-	public String viewName() {
-		return VIEW_ID;
-	}
+    @Override
+    public String formId() {
+        return VIEW_ID;
+    }
 
-	public ListAccountController getAccountController() {
-		return accountController;
-	}
+    @Override
+    public String viewName() {
+        return VIEW_ID;
+    }
 
-	public void setAccountController(ListAccountController accountController) {
-		this.accountController = accountController;
-	}
+    public ListAccountController getAccountController() {
+        return accountController;
+    }
 
+    public void setAccountController(ListAccountController accountController) {
+        this.accountController = accountController;
+    }
 
-	@SmokeTest(expectedResult=@SmokeValue(type=SmokeValueType.BOOLEAN,value="true"),enabled=true)
-	private boolean testInit() {
-		//da init @PostConstruct ist wurde sie zum testzeitpunkt bereits aufgerufen
-		// dies ermöglicht das ergebnis direkt zu ueberpruefen ohne einen expliziten aufruf der methode durchzuführen
-		//accounts muss gesetzt sein und mindesten ein account enthalten sein.
-		//dadurch kann auch sicher gestellt werden, dass die datenbankverbindung korrekt konfiguriert ist.
-		return this.getAccounts() != null && this.getAccounts().size() > 0;
-	}
+    @SmokeTest(expectedResult = @SmokeValue(type = SmokeValueType.BOOLEAN, value = "true"), enabled = true)
+    private boolean testInit() {
+        // da init @PostConstruct ist wurde sie zum testzeitpunkt bereits
+        // aufgerufen
+        // dies ermöglicht das ergebnis direkt zu ueberpruefen ohne einen
+        // expliziten aufruf der methode durchzuführen
+        // accounts muss gesetzt sein und mindesten ein account enthalten sein.
+        // dadurch kann auch sicher gestellt werden, dass die
+        // datenbankverbindung korrekt konfiguriert ist.
+        return this.getAccounts() != null && this.getAccounts().size() > 0;
+    }
 
 }

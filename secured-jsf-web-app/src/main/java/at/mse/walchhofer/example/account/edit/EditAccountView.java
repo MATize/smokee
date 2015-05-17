@@ -16,185 +16,184 @@ import at.mse.walchhofer.example.services.IUserManagementService;
 
 @Model
 public class EditAccountView extends AccountView implements IEditAccountView,
-Serializable {
+        Serializable {
 
-	private static final String URL_PARAM_ID = "accountid";
+    private static final String URL_PARAM_ID = "accountid";
 
-	public static final String VIEW_ID="editAccount";
+    public static final String VIEW_ID = "editAccount";
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
-	private char[] confirmPassword;
+    @NotNull
+    private char[] confirmPassword;
 
-	private Boolean emailValid = true;
-	private Boolean vornameValid = true;
-	private Boolean nachnameValid = true;
-	private Boolean passwordValid = true;
-	private Boolean confirmPasswordValid = true;
+    private Boolean emailValid = true;
+    private Boolean vornameValid = true;
+    private Boolean nachnameValid = true;
+    private Boolean passwordValid = true;
+    private Boolean confirmPasswordValid = true;
 
-	@Inject
-	FacesContext facesContext;
+    @Inject
+    FacesContext facesContext;
 
-	@EJB
-	IUserManagementService userManagement;
+    @EJB
+    IUserManagementService userManagement;
 
-	@Inject
-	UrlParamStore urlParamStore;
+    @Inject
+    UrlParamStore urlParamStore;
 
-	private EditAccountController accountController;
+    private EditAccountController accountController;
 
-	private String nextNavigationTarget;
+    private String nextNavigationTarget;
 
-	@PostConstruct
-	public void init() {
-		this.setAccountController(new EditAccountController(userManagement,
-				this));
-		super.setFacesContext(facesContext);
-	}
+    @PostConstruct
+    public void init() {
+        this.setAccountController(new EditAccountController(userManagement,
+                this));
+        super.setFacesContext(facesContext);
+    }
 
-	public void edit() {
-		if (!facesContext.isPostback()) {
-			this.getAccountController().startEdit();
-		}
-	}
+    public void edit() {
+        if (!facesContext.isPostback()) {
+            this.getAccountController().startEdit();
+        }
+    }
 
-	public String save() {
-		this.getAccountController().saveAccount();
-		return nextNavigationTarget;
-	}
-	
-	public String delete(Long id) {
-		this.setId(id);
-		this.getAccountController().deleteAccount();
-		return nextNavigationTarget;
-	}
+    public String save() {
+        this.getAccountController().saveAccount();
+        return nextNavigationTarget;
+    }
 
+    public String delete(Long id) {
+        this.setId(id);
+        this.getAccountController().deleteAccount();
+        return nextNavigationTarget;
+    }
 
-	@Override
-	public void editAccountFailed() {
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		this.nextNavigationTarget = this.viewName() + ".xhtml?faces-redirect=true";
-	}
+    @Override
+    public void editAccountFailed() {
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        this.nextNavigationTarget = this.viewName() + ".xhtml?faces-redirect=true";
+    }
 
-	@Override
-	public void editAccountSuccess() {
-		urlParamStore.pushParamsToIgnore(facesContext, getUrlParamId());
-		this.nextNavigationTarget = ListAccountView.VIEW_ID+".xhtml?faces-redirect=true";
-	}
-	
-	@Override
-	public void deleteAccountSuccess() {
-		urlParamStore.disableUrlParams();
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		this.nextNavigationTarget = ListAccountView.VIEW_ID+".xhtml?faces-redirect=true";
-	}
-	
-	@Override
-	public void deleteAccountFailed() {
-		urlParamStore.disableUrlParams();
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		this.nextNavigationTarget = facesContext.getViewRoot().getViewId() + "?faces-redirect=true".replace("/views/","");
-	}
+    @Override
+    public void editAccountSuccess() {
+        urlParamStore.pushParamsToIgnore(facesContext, getUrlParamId());
+        this.nextNavigationTarget = ListAccountView.VIEW_ID + ".xhtml?faces-redirect=true";
+    }
 
-	@Override
-	public String viewName() {
-		return VIEW_ID;
-	}
+    @Override
+    public void deleteAccountSuccess() {
+        urlParamStore.disableUrlParams();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        this.nextNavigationTarget = ListAccountView.VIEW_ID + ".xhtml?faces-redirect=true";
+    }
 
-	@Override
-	public String formId() {
-		return "editBenutzerForm";
-	}
+    @Override
+    public void deleteAccountFailed() {
+        urlParamStore.disableUrlParams();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        this.nextNavigationTarget = facesContext.getViewRoot().getViewId() + "?faces-redirect=true".replace("/views/", "");
+    }
 
-	@Override
-	public String editForm() {
-		return viewName() + ".xhtml?faces-redirect=true";
-	}
+    @Override
+    public String viewName() {
+        return VIEW_ID;
+    }
 
-	@Override
-	public String getBaseClientId() {
-		return "" + formId();
-	}
+    @Override
+    public String formId() {
+        return "editBenutzerForm";
+    }
 
-	@Override
-	protected String getClientIdForField(String field) {
-		return this.getBaseClientId() + ":" + field;
-	}
+    @Override
+    public String editForm() {
+        return viewName() + ".xhtml?faces-redirect=true";
+    }
 
-	@Override
-	public char[] getConfirmPassword() {
-		return confirmPassword;
-	}
+    @Override
+    public String getBaseClientId() {
+        return "" + formId();
+    }
 
-	@Override
-	public void setConfirmPassword(char[] confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
+    @Override
+    protected String getClientIdForField(String field) {
+        return this.getBaseClientId() + ":" + field;
+    }
 
-	public EditAccountController getAccountController() {
-		return accountController;
-	}
+    @Override
+    public char[] getConfirmPassword() {
+        return confirmPassword;
+    }
 
-	public void setAccountController(EditAccountController accountController) {
-		this.accountController = accountController;
-	}
+    @Override
+    public void setConfirmPassword(char[] confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
-	@Override
-	public void setEmailValid(Boolean valid) {
-		this.emailValid = valid;
-	}
+    public EditAccountController getAccountController() {
+        return accountController;
+    }
 
-	@Override
-	public void setVornameValid(Boolean valid) {
-		this.vornameValid = valid;
-	}
+    public void setAccountController(EditAccountController accountController) {
+        this.accountController = accountController;
+    }
 
-	@Override
-	public void setNachnameValid(Boolean valid) {
-		this.nachnameValid = valid;
-	}
+    @Override
+    public void setEmailValid(Boolean valid) {
+        this.emailValid = valid;
+    }
 
-	@Override
-	public void setPasswordValid(Boolean valid) {
-		this.passwordValid = valid;
-	}
+    @Override
+    public void setVornameValid(Boolean valid) {
+        this.vornameValid = valid;
+    }
 
-	@Override
-	public void setConfirmPasswordValid(Boolean valid) {
-		this.confirmPasswordValid = valid;
-	}
+    @Override
+    public void setNachnameValid(Boolean valid) {
+        this.nachnameValid = valid;
+    }
 
-	public Boolean getEmailValid() {
-		return emailValid;
-	}
+    @Override
+    public void setPasswordValid(Boolean valid) {
+        this.passwordValid = valid;
+    }
 
-	public Boolean getVornameValid() {
-		return vornameValid;
-	}
+    @Override
+    public void setConfirmPasswordValid(Boolean valid) {
+        this.confirmPasswordValid = valid;
+    }
 
-	public Boolean getNachnameValid() {
-		return nachnameValid;
-	}
+    public Boolean getEmailValid() {
+        return emailValid;
+    }
 
-	public Boolean getPasswordValid() {
-		return passwordValid;
-	}
+    public Boolean getVornameValid() {
+        return vornameValid;
+    }
 
-	public Boolean getConfirmPasswordValid() {
-		return confirmPasswordValid;
-	}
+    public Boolean getNachnameValid() {
+        return nachnameValid;
+    }
 
-	public static String getUrlParamId() {
-		return URL_PARAM_ID;
-	}
+    public Boolean getPasswordValid() {
+        return passwordValid;
+    }
 
-	@Override
-	public void editAccountMissingParameter() {
-		//		urlParamStore.pushParamsToIgnore(facesContext, getUrlParamId());
-		urlParamStore.disableUrlParams();
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		this.navigateToView(ListAccountView.VIEW_ID);
-	}
+    public Boolean getConfirmPasswordValid() {
+        return confirmPasswordValid;
+    }
+
+    public static String getUrlParamId() {
+        return URL_PARAM_ID;
+    }
+
+    @Override
+    public void editAccountMissingParameter() {
+        // urlParamStore.pushParamsToIgnore(facesContext, getUrlParamId());
+        urlParamStore.disableUrlParams();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        this.navigateToView(ListAccountView.VIEW_ID);
+    }
 
 }

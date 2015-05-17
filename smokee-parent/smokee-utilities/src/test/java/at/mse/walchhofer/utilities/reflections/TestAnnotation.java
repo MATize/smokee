@@ -14,11 +14,13 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, METHOD, FIELD, PARAMETER})
+@Target({ TYPE, METHOD, FIELD, PARAMETER })
 public @interface TestAnnotation {
-	
-	public final static String DEF_NAME = "USE_METHOD_NAME";
-	public String name() default DEF_NAME;
-	@Nonbinding
-	public String[] params() default {};
+
+    public final static String DEF_NAME = "USE_METHOD_NAME";
+
+    public String name() default DEF_NAME;
+
+    @Nonbinding
+    public String[] params() default {};
 }

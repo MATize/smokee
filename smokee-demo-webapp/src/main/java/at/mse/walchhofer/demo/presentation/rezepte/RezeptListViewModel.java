@@ -6,7 +6,6 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-
 @Named("rezeptList")
 @RequestScoped
 public class RezeptListViewModel implements Serializable {
@@ -22,5 +21,5 @@ public class RezeptListViewModel implements Serializable {
     public void setRezepte(List<RezeptViewModel> rezepte) {
         this.rezepte = rezepte;
     }
-    
+
 }

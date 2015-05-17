@@ -9,26 +9,27 @@ import javax.enterprise.context.ApplicationScoped;
 
 import at.mse.walchhofer.smokee.api.SmokeTest;
 
-
 @ApplicationScoped
 public class TestSuite {
-	
-	public TestSuite() {}
 
-	private Set<Method> testCases;
+    public TestSuite() {
+    }
 
-	/**
-	 * Only returning enabled tests
-	 * @return
-	 */
-	public Set<Method> getTestCases() {
-		return testCases.stream().filter(m -> {
-			return m.getAnnotation(SmokeTest.class).enabled();
-		}).collect(Collectors.toCollection(HashSet::new));
-	}
+    private Set<Method> testCases;
 
-	public void setTestCases(Set<Method> testCases) {
-		this.testCases = testCases;
-	}
-	
+    /**
+     * Only returning enabled tests
+     * 
+     * @return
+     */
+    public Set<Method> getTestCases() {
+        return testCases.stream().filter(m -> {
+            return m.getAnnotation(SmokeTest.class).enabled();
+        }).collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public void setTestCases(Set<Method> testCases) {
+        this.testCases = testCases;
+    }
+
 }

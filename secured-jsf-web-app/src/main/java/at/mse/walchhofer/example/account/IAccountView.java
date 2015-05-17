@@ -4,24 +4,24 @@ import at.mount.matize.jsf.IView;
 
 public interface IAccountView extends IView {
 
-	Long getId();
+    Long getId();
 
-	void setId(Long id);
+    void setId(Long id);
 
-	String getEmail();
+    String getEmail();
 
-	void setEmail(String email);
+    void setEmail(String email);
 
-	String getVorname();
+    String getVorname();
 
-	void setVorname(String vorname);
+    void setVorname(String vorname);
 
-	String getNachname();
+    String getNachname();
 
-	void setNachname(String nachname);
+    void setNachname(String nachname);
 
-	char[] getPassword();
+    char[] getPassword();
 
-	void setPassword(char[] password);
+    void setPassword(char[] password);
 
 }

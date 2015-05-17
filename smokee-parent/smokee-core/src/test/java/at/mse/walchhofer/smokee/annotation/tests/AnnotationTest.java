@@ -208,25 +208,24 @@ public class AnnotationTest {
         return annotationMap;
     }
 
-public List<File> testPackageScanning(String packageName) throws IOException {
+    public List<File> testPackageScanning(String packageName) throws IOException {
 
-    List<File> packages = new ArrayList<>();
-    String pkgNameFilter = packageName.replace('.', '/');
+        List<File> packages = new ArrayList<>();
+        String pkgNameFilter = packageName.replace('.', '/');
 
-    if (!pkgNameFilter.endsWith("/")) {
-        pkgNameFilter = pkgNameFilter.concat("/");
+        if (!pkgNameFilter.endsWith("/")) {
+            pkgNameFilter = pkgNameFilter.concat("/");
+        }
+
+        Enumeration<URL> resourceEnum = this.getClass().getClassLoader()
+                .getResources(pkgNameFilter);
+
+        while (resourceEnum.hasMoreElements()) {
+            URL url = resourceEnum.nextElement();
+            packages.add(new File(url.getFile()));
+        }
+
+        return packages;
     }
-    
-    
-    Enumeration<URL> resourceEnum = this.getClass().getClassLoader()
-            .getResources(pkgNameFilter);
-    
-    while (resourceEnum.hasMoreElements()) {
-        URL url = resourceEnum.nextElement();
-        packages.add(new File(url.getFile()));
-    }
-
-    return packages;
-}
 
 }

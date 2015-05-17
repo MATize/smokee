@@ -32,153 +32,152 @@ import at.mse.walchhofer.utilities.timing.StopWatch;
 @RequestScoped
 public class SmokeService {
 
-	@Inject
-	@SmokeCache
-	ISmokEEJCache testResultCache;
+    @Inject
+    @SmokeCache
+    ISmokEEJCache testResultCache;
 
-	@Inject
-	@Log
-	Logger log;
+    @Inject
+    @Log
+    Logger log;
 
-	@Inject
-	PropertyUtils propertyUtils;
+    @Inject
+    PropertyUtils propertyUtils;
 
-	@Inject
-	TestSuite testSuite;
+    @Inject
+    TestSuite testSuite;
 
-	@Inject
-	TestContext testContext;
+    @Inject
+    TestContext testContext;
 
-	@Inject
-	@SmokerStatus
-	Boolean enabled;
+    @Inject
+    @SmokerStatus
+    Boolean enabled;
 
-	@Inject
-	@Any
-	Instance<Object> smokeInstances;
+    @Inject
+    @Any
+    Instance<Object> smokeInstances;
 
-	public List<ISmokeTestResult> executeTests() throws ConfigurationException,
-			NotEnabledException {
+    public List<ISmokeTestResult> executeTests() throws ConfigurationException,
+            NotEnabledException {
 
-		validateSystemConfiguration();
+        validateSystemConfiguration();
 
-		List<ISmokeTestResult> testResults = new ArrayList<>();
+        List<ISmokeTestResult> testResults = new ArrayList<>();
 
-		testContext.setSmokeTest(true);
+        testContext.setSmokeTest(true);
 
-		//
-		// get all tests from test suite
-		// test scanning happened in cdi extension at deploy time
-		//
-		for (Method testMethod : testSuite.getTestCases()) {
-			ISmokeTestResult smokeTestResult = testResultCache.get(testMethod);
-			if (smokeTestResult == null) {
-				smokeTestResult = new SmokeTestResult();
-				smokeTestResult.setApplicationContext(getJndiPrefix());
-				smokeTestResult = executeTest(smokeTestResult, testMethod);
-			} else {
-				// only if test failed during last test run
-				if (!smokeTestResult.getPassed()) {
-					smokeTestResult = executeTest(smokeTestResult, testMethod);
-				}
-			}
-			testResults.add(smokeTestResult);
-			testResultCache.put(testMethod, smokeTestResult);
-		}
-		return testResults;
-	}
+        //
+        // get all tests from test suite
+        // test scanning happened in cdi extension at deploy time
+        //
+        for (Method testMethod : testSuite.getTestCases()) {
+            ISmokeTestResult smokeTestResult = testResultCache.get(testMethod);
+            if (smokeTestResult == null) {
+                smokeTestResult = new SmokeTestResult();
+                smokeTestResult.setApplicationContext(getJndiPrefix());
+                smokeTestResult = executeTest(smokeTestResult, testMethod);
+            } else {
+                // only if test failed during last test run
+                if (!smokeTestResult.getPassed()) {
+                    smokeTestResult = executeTest(smokeTestResult, testMethod);
+                }
+            }
+            testResults.add(smokeTestResult);
+            testResultCache.put(testMethod, smokeTestResult);
+        }
+        return testResults;
+    }
 
-	private ISmokeTestResult executeTest(ISmokeTestResult result, Method method) {
+    private ISmokeTestResult executeTest(ISmokeTestResult result, Method method) {
 
-		if (result == null) {
-			return null;
-		}
+        if (result == null) {
+            return null;
+        }
 
-		SmokeTest smokeAnnotation = method.getAnnotation(SmokeTest.class);
+        SmokeTest smokeAnnotation = method.getAnnotation(SmokeTest.class);
 
-		// wenn kein extra name gesetzt wurde für SmokeTest, verwende Name von
-		// Methode
-		if (SmokeTest.DEF_NAME.equals(smokeAnnotation.name())) {
-			result.setTestName(method.getName() + "_Test");
-		} else {
-			result.setTestName(smokeAnnotation.name());
-		}
+        // wenn kein extra name gesetzt wurde für SmokeTest, verwende Name von
+        // Methode
+        if (SmokeTest.DEF_NAME.equals(smokeAnnotation.name())) {
+            result.setTestName(method.getName() + "_Test");
+        } else {
+            result.setTestName(smokeAnnotation.name());
+        }
 
-		// Parameter Liste erzeugen
-		SmokeValue[] parameterList = smokeAnnotation.parameters();
-		Object[] params = new Object[parameterList.length];
-		int i = 0;
-		for (SmokeValue smokeParam : parameterList) {
-			log.info("Value: " + smokeParam.value());
-			log.info("Type: " + smokeParam.type().getClazz());
-			Object p = ConvertUtils.convert(smokeParam.value(), smokeParam
-					.type().getClazz());
-			params[i++] = p;
-		}
+        // Parameter Liste erzeugen
+        SmokeValue[] parameterList = smokeAnnotation.parameters();
+        Object[] params = new Object[parameterList.length];
+        int i = 0;
+        for (SmokeValue smokeParam : parameterList) {
+            log.info("Value: " + smokeParam.value());
+            log.info("Type: " + smokeParam.type().getClazz());
+            Object p = ConvertUtils.convert(smokeParam.value(), smokeParam
+                    .type().getClazz());
+            params[i++] = p;
+        }
 
-		// Instanz holen von DI
-		Object instance = smokeInstances.select(method.getDeclaringClass())
-				.get();
+        // Instanz holen von DI
+        Object instance = smokeInstances.select(method.getDeclaringClass())
+                .get();
+        // Ausfuehren von Methode mit Parametern
+        try {
+            Object ret = null;
+            method.setAccessible(true); // falls modifier private oder
+            // protected ist, ignorieren
+            // wenn parameter-list
+            // vorhanden, invoke Method mit
+            // Parametern
+            StopWatch timer = StopWatch.getInstance();
+            timer.start();
+            if (params.length > 0) {
+                ret = method.invoke(instance, params);
+            } else {
+                ret = method.invoke(instance);
+            }
+            timer.stop();
+            result.setLastRun(Calendar.getInstance().getTime());
+            result.setElapsedTime(timer.getElapsedTime());
+            if (!smokeAnnotation.expectedResult().type().getClazz()
+                    .equals(Void.class)) {
+                if (ret != null) {
+                    Object expected = ConvertUtils.convert(smokeAnnotation
+                            .expectedResult().value(), smokeAnnotation
+                            .expectedResult().type().getClazz());
+                    result.setPassed(expected != null && expected.equals(ret));
+                } else {
+                    result.setPassed(false);
+                }
+            } else {
+                result.setPassed(true);
+            }
+        } catch (IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            e.printStackTrace();
+            result.setPassed(false);
+        }
+        return result;
+    }
 
-		// Ausfuehren von Methode mit Parametern
-		try {
-			Object ret = null;
-			method.setAccessible(true); // falls modifier private oder
-			// protected ist, ignorieren
-			// wenn parameter-list
-			// vorhanden, invoke Method mit
-			// Parametern
-			StopWatch timer = StopWatch.getInstance();
-			timer.start();
-			if (params.length > 0) {
-				ret = method.invoke(instance, params);
-			} else {
-				ret = method.invoke(instance);
-			}
-			timer.stop();
-			result.setLastRun(Calendar.getInstance().getTime());
-			result.setElapsedTime(timer.getElapsedTime());
-			if (!smokeAnnotation.expectedResult().type().getClazz()
-					.equals(Void.class)) {
-				if (ret != null) {
-					Object expected = ConvertUtils.convert(smokeAnnotation
-							.expectedResult().value(), smokeAnnotation
-							.expectedResult().type().getClazz());
-					result.setPassed(expected != null && expected.equals(ret));
-				} else {
-					result.setPassed(false);
-				}
-			} else {
-				result.setPassed(true);
-			}
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-			result.setPassed(false);
-		}
-		return result;
-	}
+    private String getJndiPrefix() throws ConfigurationException {
+        return propertyUtils.getJndiPrefixFromProperties();
+    }
 
-	private String getJndiPrefix() throws ConfigurationException {
-		return propertyUtils.getJndiPrefixFromProperties();
-	}
+    private void validateSystemConfiguration() throws NotEnabledException,
+            ConfigurationException {
+        if (!enabled) {
+            throw new NotEnabledException();
+        }
 
-	private void validateSystemConfiguration() throws NotEnabledException,
-			ConfigurationException {
-		if (!enabled) {
-			throw new NotEnabledException();
-		}
+        if (testResultCache == null) {
+            throw new ConfigurationException(
+                    "Smoketest Result Cache has not been correctly initialized!");
+        }
 
-		if (testResultCache == null) {
-			throw new ConfigurationException(
-					"Smoketest Result Cache has not been correctly initialized!");
-		}
-
-		if (testSuite == null) {
-			throw new ConfigurationException(
-					"Test Suite has not been correctly initialized!");
-		}
-		getJndiPrefix();
-	}
+        if (testSuite == null) {
+            throw new ConfigurationException(
+                    "Test Suite has not been correctly initialized!");
+        }
+        getJndiPrefix();
+    }
 
 }

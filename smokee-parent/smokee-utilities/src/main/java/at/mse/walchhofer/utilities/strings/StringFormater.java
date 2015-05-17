@@ -4,13 +4,13 @@ import java.util.List;
 
 public class StringFormater {
 
-	public static String listToString(List<String> stringList, String seperator) {
-		String sep = "";
-		String ret = "";
-		for (String cur : stringList) {
-			ret = ret + sep + cur;
-			sep = seperator;
-		}
-		return ret;
-	}
+    public static String listToString(List<String> stringList, String seperator) {
+        String sep = "";
+        String ret = "";
+        for (String cur : stringList) {
+            ret = ret + sep + cur;
+            sep = seperator;
+        }
+        return ret;
+    }
 }

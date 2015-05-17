@@ -15,30 +15,30 @@ import javax.ws.rs.core.Response.Status;
 import at.mse.walchhofer.smokee.utils.FileUtils;
 
 @RequestScoped
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, "application/js","text/css" })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, "application/js", "text/css" })
 @Path("/resources")
 public class ResourcesResource {
 
-	private static final String BASE_DIR = "web";
+    private static final String BASE_DIR = "web";
 
-	@GET
-	@Path("/{type}/{file}")
-	public Response getJsFile(@PathParam("file") String filename, @PathParam("type") String type) {
-		URL resource = this.getClass().getClassLoader().getResource(BASE_DIR+"/"+type+"/"+filename);
-		if(resource != null) {
-			File file = FileUtils.getFileForUrl(resource);
-			if(file.isFile() && file.exists()) {
-				String mediaType="text/";
-				if(type.equals("js")) {
-					mediaType += "javascript";
-				} else {
-					mediaType += "css";
-				}
-				mediaType += "; charset=UTF-8";
-				return Response.ok().entity(file).type(mediaType).build();
-			}
-		}
-		return Response.status(Status.NOT_FOUND).type(MediaType.APPLICATION_JSON).build();
-	}
+    @GET
+    @Path("/{type}/{file}")
+    public Response getJsFile(@PathParam("file") String filename, @PathParam("type") String type) {
+        URL resource = this.getClass().getClassLoader().getResource(BASE_DIR + "/" + type + "/" + filename);
+        if (resource != null) {
+            File file = FileUtils.getFileForUrl(resource);
+            if (file.isFile() && file.exists()) {
+                String mediaType = "text/";
+                if (type.equals("js")) {
+                    mediaType += "javascript";
+                } else {
+                    mediaType += "css";
+                }
+                mediaType += "; charset=UTF-8";
+                return Response.ok().entity(file).type(mediaType).build();
+            }
+        }
+        return Response.status(Status.NOT_FOUND).type(MediaType.APPLICATION_JSON).build();
+    }
 
 }

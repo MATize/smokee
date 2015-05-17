@@ -6,10 +6,10 @@ import javax.faces.context.FacesContext;
 
 public class Producers {
 
-	@Produces
-	@RequestScoped
-	FacesContext getFacesContext() {
-		return FacesContext.getCurrentInstance();
-	}
+    @Produces
+    @RequestScoped
+    FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
+    }
 
 }

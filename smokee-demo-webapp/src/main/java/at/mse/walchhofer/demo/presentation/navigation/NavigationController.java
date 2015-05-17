@@ -13,31 +13,28 @@ public class NavigationController {
     private String suchen = "/views/search?faces-redirect=true";
     private String neu = "/views/new?faces-redirect=true";
 
-    
     @Inject
     FacesContext facesContext;
-    
+
     public String isActive(String navViewId) {
         String viewId = facesContext.getViewRoot().getViewId();
-        if(viewId.startsWith(navViewId)) {
+        if (viewId.startsWith(navViewId)) {
             return "active";
         } else {
             return "";
         }
     }
-    
+
     public String getUebersicht() {
         return uebersicht;
     }
-
 
     public String getSuchen() {
         return suchen;
     }
 
-
     public String getNeu() {
         return neu;
     }
-    
+
 }

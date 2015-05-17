@@ -2,10 +2,10 @@ package at.mount.matize.jsf;
 
 public interface IIdentifiable {
 
-	String getBaseClientId();
+    String getBaseClientId();
 
-	String formId();
+    String formId();
 
-	String viewName();
+    String viewName();
 
 }

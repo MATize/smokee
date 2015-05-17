@@ -8,10 +8,10 @@ import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 
 @Stateless
 public class BildService {
-    
-    @PersistenceContext(unitName="rezeptUnit")
+
+    @PersistenceContext(unitName = "rezeptUnit")
     EntityManager entityManager;
-    
+
     public Bild getById(Long id) {
         Bild b = entityManager.find(Bild.class, id);
         entityManager.detach(b);

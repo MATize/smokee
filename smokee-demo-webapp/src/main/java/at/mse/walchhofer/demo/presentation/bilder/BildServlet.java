@@ -26,8 +26,8 @@ public class BildServlet extends HttpServlet {
         Bild b = bildService.getById(Long.parseLong(imageId));
         response.setContentLengthLong(b.getSize());
         response.setContentType(b.getMimeType());
-        try (ServletOutputStream out  = response.getOutputStream()) {
-            out.write(b.getFile());    
+        try (ServletOutputStream out = response.getOutputStream()) {
+            out.write(b.getFile());
         }
     }
 

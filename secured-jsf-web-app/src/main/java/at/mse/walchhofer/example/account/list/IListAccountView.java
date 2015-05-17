@@ -8,8 +8,8 @@ import at.mse.walchhofer.example.account.IAccountView;
 
 public interface IListAccountView extends IView, IIdentifiable {
 
-	List<IAccountView> getAccounts();
+    List<IAccountView> getAccounts();
 
-	void setAccounts(List<IAccountView> accounts);
+    void setAccounts(List<IAccountView> accounts);
 
 }

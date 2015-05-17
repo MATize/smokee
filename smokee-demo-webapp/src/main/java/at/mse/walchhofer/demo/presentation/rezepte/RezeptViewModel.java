@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 
 import at.mse.walchhofer.demo.business.bilder.entity.Bild;
 
-
 @Named("rezept")
 @RequestScoped
 public class RezeptViewModel implements Serializable {
@@ -18,23 +17,23 @@ public class RezeptViewModel implements Serializable {
     private static final long serialVersionUID = 680322268132733780L;
 
     private Long id;
-    
+
     @NotNull
-    @Size(min=3,max=200)
+    @Size(min = 3, max = 200)
     private String name;
-    
+
     @NotNull
-    @Size(min=10,max=1024)
+    @Size(min = 10, max = 1024)
     private String beschreibung;
-    
+
     @NotNull
-    @Size(min=1,max=30)
+    @Size(min = 1, max = 30)
     private String autor;
 
     private String erstelltAm;
-    
+
     private Part file;
-    
+
     private Bild randomBild;
 
     public String getBeschreibung() {
@@ -92,5 +91,5 @@ public class RezeptViewModel implements Serializable {
     public void setRandomBild(Bild randomBild) {
         this.randomBild = randomBild;
     }
-    
+
 }

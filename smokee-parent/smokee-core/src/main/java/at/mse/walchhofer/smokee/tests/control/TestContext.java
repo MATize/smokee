@@ -8,43 +8,20 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class TestContext {
 
-	private boolean smokeTest;
-	
-	private Set<Object> managedTransactions = new HashSet<>();
-	
-	private boolean preMarkForRollback = false;
-	
-	private String rollbackBoundaryName;
+    private boolean smokeTest;
 
-	public boolean getSmokeTest() {
-		return smokeTest;
-	}
+    private Set<Object> managedTransactions = new HashSet<>();
 
-	public void setSmokeTest(boolean smokeTest) {
-		this.smokeTest = smokeTest;
-	}
+    public boolean getSmokeTest() {
+        return smokeTest;
+    }
 
-	public boolean isPreMarkForRollback() {
-		return preMarkForRollback;
-	}
+    public void setSmokeTest(boolean smokeTest) {
+        this.smokeTest = smokeTest;
+    }
 
-	public void setPreMarkForRollback(boolean preMarkForRollback) {
-		this.preMarkForRollback = preMarkForRollback;
-	}
+    public Set<Object> getManagedTransactions() {
+        return managedTransactions;
+    }
 
-	public void setRollbackBoundaryName(String name) {
-		this.rollbackBoundaryName = name;
-	}
-
-	public String getRollbackBoundaryName() {
-		return this.rollbackBoundaryName;
-	}
-
-	public Set<Object> getManagedTransactions() {
-		return managedTransactions;
-	}
-
-	public void setManagedTransactions(Set<Object> managedTransactions) {
-		this.managedTransactions = managedTransactions;
-	}
 }

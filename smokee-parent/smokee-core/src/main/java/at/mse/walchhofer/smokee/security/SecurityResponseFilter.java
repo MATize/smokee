@@ -14,14 +14,15 @@ import at.mse.walchhofer.smokee.api.security.Constants;
 @PreMatching
 public class SecurityResponseFilter implements ContainerResponseFilter {
 
-	@Override
-	public void filter(ContainerRequestContext requestContext,
-			ContainerResponseContext responseContext) throws IOException {
-		
-		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*" ); // ip check?
-		responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true" );
-		responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" );
-		responseContext.getHeaders().add("Access-Control-Allow-Headers", Constants.HTTP_HEADER_API_KEY + ", " + Constants.HTTP_HEADER_AUTH_TOKEN );
-	}
+    @Override
+    public void filter(ContainerRequestContext requestContext,
+            ContainerResponseContext responseContext) throws IOException {
+
+        responseContext.getHeaders().add("Access-Control-Allow-Origin", "*"); // ip
+                                                                              // check?
+        responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
+        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", Constants.HTTP_HEADER_API_KEY + ", " + Constants.HTTP_HEADER_AUTH_TOKEN);
+    }
 
 }

@@ -4,16 +4,16 @@ import at.mse.walchhofer.example.account.IAccountFormView;
 
 public interface IEditAccountView extends IAccountFormView {
 
-	void editAccountFailed();
+    void editAccountFailed();
 
-	void editAccountSuccess();
+    void editAccountSuccess();
 
-	String editForm();
+    String editForm();
 
-	void editAccountMissingParameter();
+    void editAccountMissingParameter();
 
-	void deleteAccountSuccess();
-	
-	void deleteAccountFailed();
+    void deleteAccountSuccess();
+
+    void deleteAccountFailed();
 
 }

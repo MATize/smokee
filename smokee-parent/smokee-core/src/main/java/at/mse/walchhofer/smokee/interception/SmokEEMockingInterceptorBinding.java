@@ -11,11 +11,10 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-
 @Inherited
 @InterceptorBinding
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ METHOD,FIELD,TYPE })
-public @interface SmokEEInterceptorBinding {
-	
+@Target({ METHOD, FIELD, TYPE })
+public @interface SmokEEMockingInterceptorBinding {
+
 }

@@ -6,8 +6,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class DynamicClassesLoader extends URLClassLoader {
-	
-	public DynamicClassesLoader(ClassLoader parentClassLoader) throws MalformedURLException {
-			super(new URL[] {new File("target/dynamic-classes/").toURI().toURL()}, parentClassLoader);
-	}
+
+    public DynamicClassesLoader(ClassLoader parentClassLoader) throws MalformedURLException {
+        super(new URL[] { new File("target/dynamic-classes/").toURI().toURL() }, parentClassLoader);
+    }
 }

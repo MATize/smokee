@@ -7,5 +7,5 @@ public class RezeptValidator {
     public boolean isValid(Rezept rezept) {
         return rezept != null;
     }
-    
+
 }
